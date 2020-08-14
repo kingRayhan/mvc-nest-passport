@@ -10,15 +10,16 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request, Response } from 'express';
-import { AuthGuard } from '@nestjs/passport';
 import { AuthenticatedGuard } from './auth/guards/isAuth.guard';
 import { LoginGuard } from './auth/guards/login.guard';
 import { PassportFilter } from './auth/passport/unauthorize.filters';
 import { UnAuthorizeRedirect } from './auth/guards/redirect.filters';
+import { PageNotFound } from './notfound.filter';
 
 interface AppRequest extends Request {
   user: any;
 }
+@UseFilters(PageNotFound)
 @UseFilters(UnAuthorizeRedirect)
 @Controller()
 export class AppController {
